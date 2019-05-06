@@ -35,12 +35,32 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+
+    $empleado = [];
+    
+    $admin = [];
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Historial', 'items' => [
+                ['label' => 'Ver Historial','url' => ['/historial/index']],
+                ['label' => 'Eliminar Historial','url' => ['/historial/index']],
+                ['label' => 'Crear Historial','url' => ['/historial/create']],
+                ]
+            ],
+            ['label' => 'Presupuesto', 'items' => [
+                ['label' => 'Ver Presupuesto','url' => ['/presupuesto/index']],
+                ['label' => 'Eliminar Presupuesto','url' => ['/presupuesto/index']],
+                ['label' => 'Crear Presupuesto','url' => ['/presupuesto/create']],
+                ]
+            ],
+            ['label' => 'Personal', 'items' => [
+                ['label' => 'Ver Personal','url' => ['/personal/index']],
+                ['label' => 'Añadir Personal','url' => ['/personal/create']],
+                ]
+            ],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
@@ -63,6 +83,9 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
+        <?php
+            var_dump(Yii::$app->user->id);
+        ?>
         <?= $content ?>
     </div>
 </div>
